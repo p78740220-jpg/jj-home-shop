@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Venom edits – Your Friendly Neighborhood Shop</title>
+  <meta name="description" content="A colorful, single-page info website for a local shop. Edit this file to change the shop name, photos, and details. No uploads – only the owner can modify content by editing the code." />
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-1: #fef3c7; /* amber-100 */
+      --bg-2: #cffafe; /* cyan-100 */
+      --bg-3: #ede9fe; /* violet-100 */
+      --ink: #0f172a;  /* slate-900 */
+      --muted: #334155; /* slate-700 */
+      --primary: #7c3aed; /* violet-600 */
+      --accent: #f43f5e;  /* rose-500 */
+      --success: #16a34a; /* green-600 */
+      --ring: rgba(124, 58, 237, .35);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--ink);
+      background: linear-gradient(120deg, var(--bg-1), var(--bg-2), var(--bg-3));
+      background-size: 180% 180%;
+      animation: bgMove 18s ease infinite;
+    }
+
+    @keyframes bgMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+    header { position: sticky; top: 0; z-index: 20; backdrop-filter: saturate(180%) blur(8px); background: rgba(255,255,255,.6); border-bottom: 1px solid rgba(0,0,0,.06); }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+    .logo {
+      width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center;
+      background: conic-gradient(from 180deg, #f472b6, #60a5fa, #f59e0b, #34d399, #a78bfa, #f472b6);
+      box-shadow: 0 6px 20px rgba(124,58,237,.25);
+    }
+    .brand h1 { font-size: 1.15rem; margin: 0; font-weight: 700; letter-spacing:.2px; }
+    .nav a { color: var(--muted); text-decoration: none; font-weight: 600; }
+    .nav a:hover { color: var(--primary); }
+
+    .hero { position: relative; padding: 56px 0 32px; }
+    .hero-inner { display: grid; grid-template-columns: 1.1fr .9fr; gap: 24px; align-items: center; }
+    .title { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; margin: 0 0 8px; }
+    .tagline { margin: 0 0 16px; color: var(--muted); }
+
+    .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 14px; border: 0; cursor: pointer; font-weight: 700; text-decoration: none;
+      box-shadow: 0 8px 22px rgba(16, 24, 40, .08); transition: transform .12s ease, box-shadow .2s ease;
+    }
+    .btn-primary { background: linear-gradient(135deg, var(--primary), #22d3ee); color: white; }
+    .btn-ghost { background: white; color: var(--primary); border: 2px solid rgba(124,58,237,.15); }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(16,24,40,.12); }
+
+    .hero-card { position: relative; border-radius: 24px; overflow: hidden; background: white; box-shadow: 0 20px 60px rgba(124,58,237,.18); }
+    .hero-card img { width: 100%; height: 100%; display: block; object-fit: cover; aspect-ratio: 4 / 3; }
+
+    /* Decorative floating shapes */
+    .shape { position: absolute; border-radius: 999px; filter: blur(10px); opacity: .6; }
+    .shape.s1 { width: 120px; height: 120px; background: #a78bfa; top: -30px; right: 12%; animation: float1 7s ease-in-out infinite; }
+    .shape.s2 { width: 160px; height: 160px; background: #fb7185; bottom: -30px; left: -20px; animation: float2 9s ease-in-out infinite; }
+    .shape.s3 { width: 90px; height: 90px; background: #34d399; top: 10%; left: 40%; animation: float3 11s ease-in-out infinite; }
+
+    @keyframes float1 { 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(12px);} }
+    @keyframes float2 { 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-14px);} }
+    @keyframes float3 { 0%,100%{ transform: translate(0,0);} 50%{ transform: translate(8px,-8px);} }
+
+    /* Info cards */
+    .grid { display: grid; gap: 18px; grid-template-columns: repeat(3, 1fr); }
+    .card { background: white; border-radius: 20px; padding: 18px; box-shadow: 0 10px 30px rgba(16, 24, 40, .08); border: 1px solid rgba(0,0,0,.06); }
+    .card h3 { margin: 0 0 6px; font-size: 1.05rem; }
+    .muted { color: var(--muted); }
+
+    /* Gallery */
+    .gallery { margin-top: 8px; display: grid; gap: 12px; grid-template-columns: repeat(4, 1fr); }
+    .gallery figure { margin: 0; border-radius: 16px; overflow: hidden; background: #fff; border: 1px solid rgba(0,0,0,.06); box-shadow: 0 8px 24px rgba(16,24,40,.08); cursor: zoom-in; }
+    .gallery img { width: 100%; height: 100%; display: block; object-fit: cover; aspect-ratio: 1 / 1; transition: transform .25s ease; }
+    .gallery img:hover { transform: scale(1.04); }
+
+    /* Lightbox */
+    .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.6); display: grid; place-items: center; z-index: 50; padding: 20px; }
+    .lightbox.hidden { display: none; }
+    .lightbox-inner { background: #000; border-radius: 16px; max-width: min(90vw, 1100px); max-height: 86vh; overflow: hidden; position: relative; }
+    .lightbox img { display: block; width: 100%; height: 100%; object-fit: contain; background: #000; }
+    .close { position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,.9); border: 0; border-radius: 999px; width: 42px; height: 42px; display: grid; place-items: center; cursor: pointer; font-weight: 800; }
+    .close:focus { outline: 4px solid var(--ring); }
+
+    /* Sections */
+    section { margin: 42px 0; }
+    .section-title { font-size: 1.6rem; margin: 0 0 8px; }
+
+    /* Footer */
+    footer { margin-top: 40px; padding: 32px 0 80px; text-align: center; color: var(--muted); }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr 1fr; }
+      .gallery { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .grid { grid-template-columns: 1fr; }
+      .gallery { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Decorative shapes (graphics) -->
+  <div class="shape s1" aria-hidden="true"></div>
+  <div class="shape s2" aria-hidden="true"></div>
+  <div class="shape s3" aria-hidden="true"></div>
+
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#top">
+        <div></div>
+        <h1><!-- EDIT_HERE: Shop Name -->🛍️ JJ HOME WARE </h1>
+      </a>
+      <nav style="display:flex; gap:16px;">
+        <a href="#about">About</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" id="top">
+    <section class="hero" aria-label="Intro">
+      <div class="hero-inner">
+        <div>
+          <h2 class="title"><!-- EDIT_HERE: Headline -->JJ HOME WARE</h2>
+          <p class="tagline">Welcome to <strong><!-- EDIT_HERE: Shop Name -->JJ HOME WARE</strong> – your friendly neighborhood store for tv,toys, fridge,
+ washing machine, stationery, gifts, and more. We keep things bright, cheerful, and useful!</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#gallery">See Photos</a>
+            <a class="btn btn-ghost" href="#contact">Contact Us</a>
+          </div>
+        </div>
+        <div class="hero-card" aria-hidden="true">
+          <!-- EDIT_HERE: Replace hero.jpg with your shop photo placed in the images/ folder -->
+          <img src="images/hero.jpg" alt="Front view of the shop with colorful signage" />
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <h3 class="section-title">About the Shop</h3>
+      <div class="grid">
+        <div class="card">
+          <h3>how you can reach us ?</h3>
+          <p class="muted">come to our shop by the given address or you can contgact us from informathion given hear.</p>
+        </div>
+        <div class="card">
+          <h3>Hours</h3>
+          <p class="muted"><!-- EDIT_HERE: Business hours -->Mon–Sat: 9:00 AM – 9:00 PM<br>Sun: !only on special days .10:00 AM – 8:00 PM</p>
+        </div>
+        <div class="card">
+          <h3>Find us</h3>
+          <p class="muted"><!-- EDIT_HERE: Address -->JJ Homeware puneliparambil complex kombidinjamakkal,kombidinjamakal junction,chalakudy, PIN 680697</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <h3 class="section-title">Photo Gallery</h3>
+      <p class="muted">Click any photo to view it larger. (Only the owner can change these by editing the file – no uploads.)</p>
+      <div class="gallery">
+        <!-- EDIT_HERE: Replace the image filenames below with your photos inside the images/ folder -->
+        <figure><img class="gallery-item" src="images/shop-1.jpg" alt="Inside the shop – shelves with items"></figure>
+        <figure><img class="gallery-item" src="images/shop-2.jpg" alt="Counter area with colorful display"></figure>
+        <figure><img class="gallery-item" src="images/shop-3.jpg" alt="Gift section with ribbons and wrapping"></figure>
+        <figure><img class="gallery-item" src="images/shop-4.jpg" alt="Snacks and beverages corner"></figure>
+        <figure><img class="gallery-item" src="images/shop-5.jpg" alt="Stationery wall with notebooks and pens"></figure>
+        <figure><img class="gallery-item" src="images/shop-6.jpg" alt="Seasonal decorations on display"></figure>
+        <figure><img class="gallery-item" src="images/shop-7.jpg" alt="Entrance of the shop"></figure>
+        <figure><img class="gallery-item" src="images/shop-8.jpg" alt="Checkout counter and welcome sign"></figure>
+        <figure><img class="gallery-item" src="images/shop-9.jpg" alt="Checkout clock"></figure>
+        <figure><img class="gallery-item" src="images/shop-10.jpg" alt="Checkout clock"></figure>
+        <figure><img class="gallery-item" src="images/shop-11.jpg" alt="Checkout clock"></figure>
+        <figure><img class="gallery-item" src="images/shop-12.jpg" alt="Checkout clock"></figure>
+        <figure><img class="gallery-item" src="images/shop-13.jpg" alt="Checkout clock"></figure>
+        <figure><img class="gallery-item" src="images/shop-14.jpg" alt="Checkout clock"></figure>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h3 class="section-title">Contact</h3>
+      <div class="grid">
+        <div class="card">
+          <h3>Call</h3>
+          <p class="muted"><!-- EDIT_HERE: Phone -->+91 9745641637,7012831674</p>
+        </div>
+        <div class="card">
+          <h3>google map details</details></h3>
+          <p class="muted"><a href="https://maps.app.goo.gl/vCvc9jbc3YfEx5977?g_st=aw" target="_blank" rel="noopener">Chat with us</a></p>
+        </div>
+        <div class="card">
+          <h3>Email</h3>
+          <p class="muted"><!-- EDIT_HERE: Email -->not allowed</p>
+        </div>
+      </div>
+
+      <!-- Optional: Embed a map. Replace the src with your Google Maps embed link. -->
+      <!--
+      <div style="margin-top:16px; border-radius:16px; overflow:hidden; box-shadow:0 8px 24px rgba(16,24,40,.1);">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m1..." width="100%" height="360"
+          style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+      -->
+    </section>
+  </main>
+
+  <footer>
+    <small>© <span id="year"></span> <strong><!-- EDIT_HERE: Shop Name -->venom edits</strong>. All rights reserved.</small>
+  </footer>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="lightbox hidden" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <div class="lightbox-inner">
+      <button class="close" aria-label="Close viewer" title="Close">✕</button>
+      <img id="lightbox-img" alt="Expanded gallery image" />
+    </div>
+  </div>
+
+  <script>
+    // Set current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Simple lightbox behavior
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = lightbox.querySelector('.close');
+
+    function openLightbox(src, alt) {
+      lightboxImg.src = src;
+      lightboxImg.alt = alt || '';
+      lightbox.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      lightbox.classList.add('hidden');
+      document.body.style.overflow = '';
+      lightboxImg.src = '';
+    }
+
+    document.querySelectorAll('.gallery-item').forEach(img => {
+      img.addEventListener('click', () => openLightbox(img.src, img.alt));
+    });
+
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) closeLightbox();
+    });
+  </script>
+</body>
+</html>
